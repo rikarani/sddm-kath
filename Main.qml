@@ -118,6 +118,8 @@ Pane {
 
           // Select Session
           Session {
+            id: sessionButton
+
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.preferredHeight: root.height / 18
             Layout.maximumHeight: root.height / 18

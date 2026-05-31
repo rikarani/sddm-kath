@@ -3,8 +3,6 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 Item {
-  id: sessionButton
-
   implicitWidth: parent.width / 2
   Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
   Layout.preferredHeight: root.height / 18

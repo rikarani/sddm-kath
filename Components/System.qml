@@ -32,7 +32,7 @@ RowLayout {
       text: modelData[1]
       font.pointSize: root.font.pointSize * 1.25
 
-      icon.source: Qt.resolvedUrl("Assets/" + modelData[0] + ".svg")
+      icon.source: Qt.resolvedUrl("../Assets/" + modelData[0] + ".svg")
       icon.height: 2 * Math.round((root.font.pointSize * 3) / 2)
       icon.width: 2 * Math.round((root.font.pointSize * 3) / 2)
       icon.color: (hovered || activeFocus) ? root.palette.highlightedText :  root.palette.highlight

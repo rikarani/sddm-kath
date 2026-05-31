@@ -179,6 +179,8 @@ Column {
       text: selectUser.currentText
       color: root.palette.highlight
       font.bold: true
+      // Nggak perlu pake Font.AllLowercase di sini kalau mau ngirim data aslinya
+      // Tapi karena cuma visual, biarin aja gapapa.
       font.capitalization: Font.AllLowercase
       placeholderText: textConstants.userName
       placeholderTextColor: "#bbbbbb"
@@ -196,7 +198,8 @@ Column {
         border.color: "transparent"
       }
 
-      onAccepted: sddm.login(username.text.toLowerCase(), password.text.toLowerCase(), sessionButton.selectedSession)
+      // FIX: Hapus .toLowerCase() dari username dan password
+      onAccepted: sddm.login(username.text, password.text, sessionButton.selectedSession)
       KeyNavigation.down: passwordIcon
     }
   }
@@ -219,6 +222,8 @@ Column {
       icon.width: parent.height * 0.25
       icon.color: root.palette.highlight
       icon.source: checked ? Qt.resolvedUrl("../Assets/Password.svg") : Qt.resolvedUrl("../Assets/Password2.svg")
+
+      // Tombol ini otomatis nge-handle toggle() saat diklik karena checkable: true
       checkable: true
 
       background: Rectangle {
@@ -235,9 +240,7 @@ Column {
         }
       ]
 
-      onClicked: toggle()
-      Keys.onReturnPressed: toggle()
-      Keys.onEnterPressed: toggle()
+      // FIX: Semua panggilan manual toggle() dihapus dari sini biar nggak membalikkan fungsinya
       KeyNavigation.down: password
     }
 
@@ -267,7 +270,8 @@ Column {
         border.color: "transparent"
       }
 
-      onAccepted: sddm.login(username.text.toLowerCase(), password.text.toLowerCase(), sessionButton.selectedSession)
+      // FIX: Hapus .toLowerCase()
+      onAccepted: sddm.login(username.text, password.text, sessionButton.selectedSession)
       KeyNavigation.down: loginButton
     }
   }
@@ -287,7 +291,8 @@ Column {
       anchors.centerIn: parent
 
       text: textConstants.login
-      enabled: username.text !== "" && password.text !== ""
+      // FIX: Pakai length > 0 supaya lebih aman untuk mendeteksi isi form
+      enabled: username.text.length > 0 && password.text.length > 0
       hoverEnabled: true
 
       contentItem: Text {
@@ -309,7 +314,8 @@ Column {
         radius: 20
       }
 
-      onClicked: sddm.login(username.text.toLowerCase(), password.text.toLowerCase(), sessionButton.selectedSession)
+      // FIX: Hapus .toLowerCase()
+      onClicked: sddm.login(username.text, password.text, sessionButton.selectedSession)
       Keys.onReturnPressed: clicked()
       Keys.onEnterPressed: clicked()
       KeyNavigation.down: systemButtons.children[0]
